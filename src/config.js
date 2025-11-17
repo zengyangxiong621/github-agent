@@ -24,7 +24,7 @@ export const config = {
   
   // 工作区配置
   workspace: {
-    path: process.env.WORKSPACE_PATH || process.cwd()
+    path: process.env.WORKSPACE_PATH || process.cwd()  // 默认使用启动时的当前目录
   }
 };
 

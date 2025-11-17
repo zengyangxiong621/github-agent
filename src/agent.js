@@ -3,6 +3,7 @@ import { GitHubMCPClient } from './github-mcp.js';
 import { GitCommands, formatStatus, formatLog } from './git-commands.js';
 import { FileOperations, formatFileList, formatFileContent } from './file-operations.js';
 import { TerminalCommands, formatCommandResult, formatMultiCommandResult, formatCommandHistory } from './terminal-commands.js';
+import { WorkspaceManager, formatPath } from './workspace-manager.js';
 import { tools } from './tools.js';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -14,9 +15,10 @@ export class GitHubAgent {
   constructor() {
     this.deepseek = new DeepSeekClient();
     this.github = new GitHubMCPClient();
-    this.git = new GitCommands();
-    this.fileOps = new FileOperations();
-    this.terminal = new TerminalCommands();
+    this.workspace = new WorkspaceManager();  // 工作目录管理器
+    this.git = new GitCommands(this.workspace.getCurrentPath());
+    this.fileOps = new FileOperations(this.workspace.getCurrentPath());
+    this.terminal = new TerminalCommands(this.workspace.getCurrentPath());
     
     // 设置系统提示词
     this.deepseek.setSystemPrompt(`你是一个专业的 GitHub、Git 和系统操作助手。你可以帮助用户：
@@ -398,6 +400,48 @@ export class GitHubAgent {
             console.log(chalk.green(`\n✓ 命令 "${args.commandName}" 存在于系统中\n`));
           } else {
             console.log(chalk.yellow(`\n⚠ 命令 "${args.commandName}" 不存在于系统中\n`));
+          }
+          return result;
+        }
+        
+        // 工作目录管理
+        case 'change_directory': {
+          const result = this.workspace.changePath(args.path);
+          if (result.success) {
+            // 同步更新所有模块的工作目录
+            const newPath = result.path;
+            this.git.setWorkingDir(newPath);
+            this.fileOps.setWorkingDir(newPath);
+            this.terminal.setWorkingDir(newPath);
+            
+            console.log(chalk.green(`\n✓ ${result.message}`));
+            console.log(chalk.cyan(`📁 当前目录: ${formatPath(newPath)}\n`));
+          } else {
+            console.log(chalk.red(`\n✗ ${result.error}\n`));
+          }
+          return result;
+        }
+        
+        case 'show_current_directory': {
+          const result = this.workspace.showCurrentPath();
+          console.log(chalk.cyan(`\n📁 当前工作目录:\n`));
+          console.log(chalk.white(`   ${formatPath(result.path)}\n`));
+          return result;
+        }
+        
+        case 'go_to_parent_directory': {
+          const result = this.workspace.goUp();
+          if (result.success) {
+            // 同步更新所有模块的工作目录
+            const newPath = result.path;
+            this.git.setWorkingDir(newPath);
+            this.fileOps.setWorkingDir(newPath);
+            this.terminal.setWorkingDir(newPath);
+            
+            console.log(chalk.green(`\n✓ ${result.message}`));
+            console.log(chalk.cyan(`📁 当前目录: ${formatPath(newPath)}\n`));
+          } else {
+            console.log(chalk.red(`\n✗ ${result.error}\n`));
           }
           return result;
         }

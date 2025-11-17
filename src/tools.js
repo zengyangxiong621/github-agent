@@ -487,6 +487,48 @@ export const tools = [
         required: ['commandName']
       }
     }
+  },
+  // 工作目录管理工具
+  {
+    type: 'function',
+    function: {
+      name: 'change_directory',
+      description: '切换当前工作目录。可以使用相对路径或绝对路径',
+      parameters: {
+        type: 'object',
+        properties: {
+          path: {
+            type: 'string',
+            description: '目标路径，如 "../project", "/Users/xxx/project", "src"'
+          }
+        },
+        required: ['path']
+      }
+    }
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'show_current_directory',
+      description: '显示当前工作目录路径',
+      parameters: {
+        type: 'object',
+        properties: {},
+        required: []
+      }
+    }
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'go_to_parent_directory',
+      description: '返回到上一级目录（相当于 cd ..）',
+      parameters: {
+        type: 'object',
+        properties: {},
+        required: []
+      }
+    }
   }
 ];
 

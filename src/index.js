@@ -67,6 +67,11 @@ function printHelp() {
   console.log(chalk.gray('  • 运行 npm install'));
   console.log(chalk.gray('  • 查看系统信息'));
   console.log(chalk.gray('  • 检查 node 命令是否存在\n'));
+  
+  console.log(chalk.yellow('工作目录:'));
+  console.log(chalk.gray('  • 显示当前目录'));
+  console.log(chalk.gray('  • 切换到 /Users/xxx/project'));
+  console.log(chalk.gray('  • 返回上一级目录\n'));
 }
 
 /**
@@ -84,7 +89,9 @@ async function main() {
   console.log(chalk.gray('正在初始化 GitHub Agent...\n'));
   await agent.initialize();
   
-  console.log(chalk.green('✓ 初始化完成！开始对话吧。\n'));
+  // 显示当前工作目录
+  console.log(chalk.green('✓ 初始化完成！开始对话吧。'));
+  console.log(chalk.cyan(`📁 当前工作目录: ${agent.workspace.getCurrentPath()}\n`));
   console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
   
   // 开始交互循环
