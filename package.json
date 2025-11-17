@@ -1,7 +1,7 @@
 {
   "name": "github-agent",
-  "version": "1.0.0",
-  "description": "一个基于 DeepSeek AI 和 GitHub MCP 的智能 Git 助手",
+  "version": "1.2.0",
+  "description": "一个基于 DeepSeek AI 和 GitHub MCP 的智能 Git 助手，支持文件管理和终端命令执行，支持多步骤推理",
   "main": "src/index.js",
   "type": "module",
   "scripts": {

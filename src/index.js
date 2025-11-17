@@ -22,6 +22,8 @@ function printWelcome() {
   console.log(chalk.gray('  • 执行所有 Git 命令（status, log, branch, commit 等）'));
   console.log(chalk.gray('  • 查看 GitHub 仓库信息（提交记录、分支、PR、Issues）'));
   console.log(chalk.gray('  • 搜索 GitHub 仓库和用户'));
+  console.log(chalk.gray('  • 📂 读取文件列表和内容'));
+  console.log(chalk.gray('  • 💻 执行终端命令'));
   console.log(chalk.gray('  • 智能对话，自然语言操作\n'));
   
   console.log(chalk.yellow('命令:'));
@@ -53,6 +55,18 @@ function printHelp() {
   console.log(chalk.gray('  • 显示 owner/repo 的 open 状态的 PR'));
   console.log(chalk.gray('  • 搜索 react 相关的仓库'));
   console.log(chalk.gray('  • 获取用户 github 的信息\n'));
+  
+  console.log(chalk.yellow('文件操作:'));
+  console.log(chalk.gray('  • 列出当前目录的文件'));
+  console.log(chalk.gray('  • 读取 package.json 文件'));
+  console.log(chalk.gray('  • 搜索所有 .js 文件'));
+  console.log(chalk.gray('  • 查看 src 目录下的文件\n'));
+  
+  console.log(chalk.yellow('终端命令:'));
+  console.log(chalk.gray('  • 执行命令 ls -la'));
+  console.log(chalk.gray('  • 运行 npm install'));
+  console.log(chalk.gray('  • 查看系统信息'));
+  console.log(chalk.gray('  • 检查 node 命令是否存在\n'));
 }
 
 /**

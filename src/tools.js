@@ -322,6 +322,171 @@ export const tools = [
         required: []
       }
     }
+  },
+  // 文件操作工具
+  {
+    type: 'function',
+    function: {
+      name: 'list_files',
+      description: '列出目录中的文件和文件夹',
+      parameters: {
+        type: 'object',
+        properties: {
+          path: {
+            type: 'string',
+            description: '目标路径，默认为当前目录 (.)'
+          },
+          showHidden: {
+            type: 'boolean',
+            description: '是否显示隐藏文件，默认为 false'
+          },
+          recursive: {
+            type: 'boolean',
+            description: '是否递归列出子目录，默认为 false'
+          }
+        },
+        required: []
+      }
+    }
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'read_file',
+      description: '读取文件内容',
+      parameters: {
+        type: 'object',
+        properties: {
+          filePath: {
+            type: 'string',
+            description: '文件路径'
+          },
+          maxLines: {
+            type: 'number',
+            description: '最大读取行数，0 表示全部读取，默认为 0'
+          }
+        },
+        required: ['filePath']
+      }
+    }
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'search_files',
+      description: '搜索文件（支持通配符模式）',
+      parameters: {
+        type: 'object',
+        properties: {
+          pattern: {
+            type: 'string',
+            description: '搜索模式，支持 * 和 ? 通配符，如 "*.js" 或 "test*.py"'
+          },
+          searchPath: {
+            type: 'string',
+            description: '搜索路径，默认为当前目录'
+          }
+        },
+        required: ['pattern']
+      }
+    }
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'get_file_info',
+      description: '获取文件或目录的详细信息',
+      parameters: {
+        type: 'object',
+        properties: {
+          filePath: {
+            type: 'string',
+            description: '文件或目录路径'
+          }
+        },
+        required: ['filePath']
+      }
+    }
+  },
+  // 终端命令工具
+  {
+    type: 'function',
+    function: {
+      name: 'execute_command',
+      description: '在终端执行命令。可以执行任何 shell 命令，如 ls, cat, grep, npm, python 等。注意：危险命令会被自动拒绝',
+      parameters: {
+        type: 'object',
+        properties: {
+          command: {
+            type: 'string',
+            description: '要执行的命令'
+          },
+          timeout: {
+            type: 'number',
+            description: '命令超时时间（毫秒），默认 30000'
+          }
+        },
+        required: ['command']
+      }
+    }
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'execute_commands',
+      description: '批量执行多个命令（串行执行）',
+      parameters: {
+        type: 'object',
+        properties: {
+          commands: {
+            type: 'array',
+            description: '要执行的命令数组',
+            items: {
+              type: 'string'
+            }
+          },
+          stopOnError: {
+            type: 'boolean',
+            description: '遇到错误是否停止执行，默认 false'
+          }
+        },
+        required: ['commands']
+      }
+    }
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'get_command_history',
+      description: '获取最近执行的命令历史',
+      parameters: {
+        type: 'object',
+        properties: {
+          count: {
+            type: 'number',
+            description: '获取的数量，默认 10'
+          }
+        },
+        required: []
+      }
+    }
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'check_command_exists',
+      description: '检查系统中是否存在某个命令',
+      parameters: {
+        type: 'object',
+        properties: {
+          commandName: {
+            type: 'string',
+            description: '命令名称，如 "node", "python", "git"'
+          }
+        },
+        required: ['commandName']
+      }
+    }
   }
 ];
 
