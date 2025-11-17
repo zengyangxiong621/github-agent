@@ -4,9 +4,18 @@
   "description": "一个基于 DeepSeek AI 和 GitHub MCP 的智能 Git 助手，支持文件管理、终端命令执行和灵活的工作目录管理",
   "main": "src/index.js",
   "type": "module",
+  "bin": {
+    "agent": "./src/index.js",
+    "github-agent": "./src/index.js"
+  },
+  "preferGlobal": true,
   "scripts": {
     "start": "node src/index.js",
-    "dev": "node --watch src/index.js"
+    "dev": "node --watch src/index.js",
+    "setup-global": "npm link",
+    "setup-config": "./setup-config.sh",
+    "setup": "./setup-global.sh && ./setup-config.sh",
+    "mcp-server": "node mcp-server.js"
   },
   "keywords": [
     "github",

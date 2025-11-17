@@ -1,12 +1,33 @@
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-
-// 加载环境变量
-dotenv.config();
+import { existsSync } from 'fs';
+import { homedir } from 'os';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// 多位置加载环境变量
+function loadEnvConfig() {
+  // 1. 尝试加载项目根目录的 .env（用于开发）
+  const projectEnvPath = join(dirname(__dirname), '.env');
+  if (existsSync(projectEnvPath)) {
+    dotenv.config({ path: projectEnvPath });
+    return;
+  }
+  
+  // 2. 尝试加载用户主目录的 .agent.env（用于全局使用）
+  const globalEnvPath = join(homedir(), '.agent.env');
+  if (existsSync(globalEnvPath)) {
+    dotenv.config({ path: globalEnvPath });
+    return;
+  }
+  
+  // 3. 尝试加载当前目录的 .env（兼容模式）
+  dotenv.config();
+}
+
+loadEnvConfig();
 
 export const config = {
   // DeepSeek AI 配置
