@@ -1,0 +1,30 @@
+{
+  "name": "github-agent",
+  "version": "1.0.0",
+  "description": "一个基于 DeepSeek AI 和 GitHub MCP 的智能 Git 助手",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "keywords": [
+    "github",
+    "git",
+    "ai",
+    "deepseek",
+    "mcp"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "simple-git": "^3.22.0",
+    "chalk": "^5.3.0",
+    "inquirer": "^9.2.12",
+    "ora": "^8.0.1"
+  }
+}
+
