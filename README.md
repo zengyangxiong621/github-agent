@@ -323,6 +323,19 @@ npm unlink
 
 欢迎提交 Issue 和 Pull Request！
 
+## 📚 详细文档
+
+更多详细文档请查看 `docs/` 目录：
+
+- [快速开始指南](docs/QUICKSTART.md) - 5分钟快速上手
+- [详细使用指南](docs/USAGE.md) - 完整的使用说明
+- [项目结构说明](docs/PROJECT_STRUCTURE.md) - 了解项目架构
+- [安装检查清单](docs/CHECKLIST.md) - 安装问题排查
+- [新功能说明](docs/NEW_FEATURES.md) - 最新功能介绍
+- [多步骤推理](docs/MULTI_STEP_REASONING.md) - AI 推理能力说明
+- [工作目录管理](docs/WORKSPACE_MANAGEMENT.md) - 目录切换功能
+- [文件操作优化](docs/FILE_OPERATION_OPTIMIZATION.md) - 性能优化说明
+
 ## 💡 使用技巧
 
 1. **全局使用最方便**：推荐使用 `./setup-global.sh` 安装，可以在任何项目中使用
